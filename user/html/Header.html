@@ -1,0 +1,41 @@
+<header class="topbar">
+    <button class="mobile-menu" id="mobileMenu" type="button" aria-label="Open menu" aria-controls="nav"
+        aria-expanded="false">☰</button>
+    <div class="brand-identity">
+        <a class="logo" href="#home" aria-label="Bandilki Shines home">
+            <img class="brand-logo" src="/user/assets/bandilki-mark.svg" alt="Bandilki Shines">
+        </a>
+        <div class="brand-copy">
+            <strong>THE BANDILKI SHINES</strong>
+            <span>ANTI-TARNISH &amp; ETHNIC JEWELLERY · MUMBAI</span>
+        </div>
+    </div>
+
+    <nav class="navlinks" id="nav" aria-label="Main navigation">
+        <a href="#shop" data-filter-category="All"><span aria-hidden="true">◇</span> Shop all</a>
+        <a href="#collections"><span aria-hidden="true">▦</span> Collections</a>
+        <a href="#elegance"><span aria-hidden="true">▤</span> Our story</a>
+        <a href="#trackOrderBackdrop" data-track-open><span aria-hidden="true">↗</span> Track order</a>
+    </nav>
+    <form class="site-search" id="siteSearchForm" role="search">
+        <button type="submit" aria-label="Search products">⌕</button>
+        <input type="search" id="siteSearch" placeholder="Search rings, chains, hoops, bracelets..."
+            aria-label="Search jewellery">
+    </form>
+    <div class="actions">
+        <button class="account-button" id="accountBtn" type="button" aria-label="Your account" title="Your account">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="3.5"/>
+                <path d="M5 20c.5-4 3-6 7-6s6.5 2 7 6"/>
+            </svg>
+            <span>Account</span>
+        </button>
+        <button class="cart-button" id="cartBtn" type="button" aria-label="Open shopping bag">
+            <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 8h14l-1 13H6L5 8Z"/>
+                <path d="M9 9V6a3 3 0 0 1 6 0v3"/>
+            </svg>
+            <span>Bag</span> <span class="cart-count" id="bagCount">0</span>
+        </button>
+    </div>
+</header>

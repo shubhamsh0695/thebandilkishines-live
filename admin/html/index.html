@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0d13">
+    <title>Admin | Bandilki Shines</title>
+    
+    <link rel="stylesheet" href="/admin/css/admin.css?v=2">
+</head>
+<body>
+    <section class="login-wrap" id="loginView">
+        <div class="login-card">
+            <a class="brand" href="/">Bandilki <span>Shines</span></a>
+            <h1>Admin sign in</h1>
+            <p class="muted">Sign in to manage the shared product catalog, registered customers, and customer orders.</p>
+            <form id="loginForm">
+                <label>Email address<input name="email" type="email" autocomplete="username" maxlength="254" required></label>
+                <label>Password<input name="password" type="password" autocomplete="current-password" maxlength="128" required></label>
+                <button type="submit">Sign in</button>
+                <p class="error" id="loginError" aria-live="polite"></p>
+            </form>
+            <p class="hint">Create the first administrator from the project folder with <code>py -3 server.py --create-admin</code>.</p>
+        </div>
+    </section>
+
+    <div id="adminView" hidden>
+        <header class="app-header">
+            <a class="brand" href="/">Bandilki <span>Shines</span></a>
+            <div class="header-actions">
+                <span class="muted" id="adminEmail"></span>
+                <button class="button-secondary" id="logoutButton" type="button">Sign out</button>
+            </div>
+        </header>
+        <div class="layout">
+            <aside aria-label="Admin pages">
+                <button class="nav-button active" type="button" data-page="overview">Overview</button>
+                <button class="nav-button" type="button" data-page="products">Products</button>
+                <button class="nav-button" type="button" data-page="categories">Categories</button>
+                <button class="nav-button" type="button" data-page="orders">Orders</button>
+                <button class="nav-button" type="button" data-page="customers">Customers</button>
+                <button class="nav-button" type="button" data-page="newsletter">Newsletter</button>
+                <button class="nav-button" type="button" data-page="reviews">Reviews</button>
+                <button class="nav-button" type="button" data-page="tracking">Track an order</button>
+                <button class="nav-button" type="button" data-page="branding">Branding</button>
+                <button class="nav-button" type="button" data-page="footer">Footer</button>
+            </aside>
+            <main>
+                <section data-panel="overview">
+                    <div class="page-heading"><h1>Overview</h1><p class="muted">Your store activity, from the shared database.</p></div>
+                    <div class="metrics">
+                        <div class="metric">Registered customers<strong id="customerCount">—</strong></div>
+                        <div class="metric">Orders<strong id="orderCount">—</strong></div>
+                        <div class="metric">Products<strong id="productCount">—</strong></div>
+                    </div>
+                    <div class="panel"><h2>Recent orders</h2><div class="list" id="recentOrders"></div></div>
+                </section>
+
+                <section data-panel="products" hidden>
+                    <div class="page-heading"><h1>Products</h1><p class="muted">Changes here are reflected in the storefront catalog.</p></div>
+                    <div class="panel">
+                        <h2>Add a product</h2>
+                        <form class="form-grid" id="productForm">
+                            <label>Product name<input name="name" maxlength="120" required></label>
+                            <label>Category<select id="productCategory" name="category" required></select></label>
+                            <label>Price<input name="price" type="number" min="0.01" max="1000000" step="0.01" required></label>
+                            <label>Badge (optional)<input name="badge" maxlength="24"></label>
+                            <label class="wide">Upload product image (optional)<input id="productImageInput" name="image" type="file" accept="image/jpeg,image/png"></label>
+                            <p class="wide image-help">Choose a JPEG or PNG image up to 5 MB. It will be saved on the server and used in the storefront. You can instead use an image URL.</p>
+                            <img class="image-preview wide" id="productImagePreview" alt="Selected product image preview" hidden>
+                            <label class="wide">Or photo URL (optional)<input name="imageUrl" type="url" maxlength="2000" placeholder="https://..."></label>
+                            <div class="wide form-actions"><button type="submit">Add product</button><span class="error" id="productMessage" aria-live="polite"></span></div>
+                        </form>
+                    </div>
+                    <div class="panel"><h2>Catalog</h2><div class="list" id="productList"></div></div>
+                </section>
+
+                <section data-panel="categories" hidden>
+                    <div class="page-heading"><h1>Categories</h1><p class="muted">Manage the categories shown on the storefront and available when adding products.</p></div>
+                    <div class="panel">
+                        <h2>Add a category</h2>
+                        <form class="form-grid" id="categoryForm">
+                            <label>Category name<input name="name" maxlength="80" required></label>
+                            <label>Storefront icon<select name="icon" data-category-icon-select></select></label>
+                            <div class="form-actions"><button type="submit">Add category</button><span class="error" id="categoryMessage" aria-live="polite"></span></div>
+                        </form>
+                    </div>
+                    <div class="panel"><h2>Store categories</h2><div class="list" id="categoryList"></div></div>
+                </section>
+
+                <section data-panel="orders" hidden>
+                    <div class="page-heading"><h1>Orders</h1><p class="muted">Review customer orders and update tracking status.</p></div>
+                    <div class="panel">
+                        <h2>Record an order</h2>
+                        <form class="form-grid" id="manualOrderForm">
+                            <label>Customer name<input name="name" maxlength="100" required></label>
+                            <label>Phone<input name="phone" type="tel" maxlength="20" required></label>
+                            <label>Items or notes<input name="items" maxlength="300" required></label>
+                            <label>Total<input name="total" type="number" min="0" max="10000000" step="0.01" required></label>
+                            <label class="wide">Delivery address<textarea name="address" maxlength="1000" required></textarea></label>
+                            <div class="wide form-actions"><button type="submit">Create order</button><span class="error" id="orderMessage" aria-live="polite"></span></div>
+                        </form>
+                    </div>
+                    <div class="panel"><h2>All orders</h2><div class="list" id="orderList"></div></div>
+                </section>
+
+                <section data-panel="customers" hidden>
+                    <div class="page-heading"><h1>Customers</h1><p class="muted">Registered storefront accounts. Passwords are never shown.</p></div>
+                    <div class="panel"><div class="list" id="customerList"></div></div>
+                </section>
+
+                <section data-panel="newsletter" hidden>
+                    <div class="page-heading"><h1>Newsletter subscribers</h1><p class="muted">Email addresses customers submitted through the storefront newsletter form.</p></div>
+                    <div class="panel"><div class="list" id="newsletterList"></div></div>
+                </section>
+
+                <section data-panel="reviews" hidden>
+                    <div class="page-heading"><h1>Customer reviews</h1><p class="muted">Storefront feedback, with optional contact details and customer-uploaded photos.</p></div>
+                    <div class="panel"><div class="list" id="reviewList"></div></div>
+                </section>
+
+                <section data-panel="tracking" hidden>
+                    <div class="page-heading"><h1>Track an order</h1><p class="muted">Look up an order by its number and the phone number used at checkout.</p></div>
+                    <div class="panel">
+                        <form class="form-grid" id="trackingForm">
+                            <label>Order number<input name="orderId" maxlength="40" required placeholder="BS-123456789"></label>
+                            <label>Phone number<input name="phone" type="tel" maxlength="20" required></label>
+                            <div class="wide form-actions"><button type="submit">Find order</button><span class="error" id="trackingMessage" aria-live="polite"></span></div>
+                        </form>
+                    </div>
+                    <div class="panel" id="trackingResult" hidden></div>
+                </section>
+
+                <section data-panel="branding" hidden>
+                    <div class="page-heading"><h1>Branding</h1><p class="muted">Update the storefront banner, logo, or configure the optional opening video. Only the video is shown on the opening screen.</p></div>
+                    <div class="panel">
+                        <h2>Storefront banner</h2>
+                        <form id="heroImageForm" class="form-grid">
+                            <label class="wide">Upload banner image<input id="heroImageInput" name="heroImage" type="file" accept="image/jpeg,image/png"></label>
+                            <p class="wide image-help">Use a JPEG or PNG image up to 5 MB. This image appears behind the main storefront banner text.</p>
+                            <img class="branding-preview hero-image-preview wide" id="heroImagePreview" alt="Current storefront banner preview" hidden>
+                            <div class="wide form-actions">
+                                <button type="submit">Save banner image</button>
+                                <button class="button-secondary" id="removeHeroImageButton" type="button">Restore default banner</button>
+                                <span class="error" id="heroImageMessage" aria-live="polite"></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel">
+                        <h2>Store logo</h2>
+                        <form id="logoForm" class="form-grid">
+                            <label class="wide">Upload logo<input id="logoInput" name="logo" type="file" accept="image/jpeg,image/png"></label>
+                            <p class="wide image-help">Use a JPEG or PNG image up to 5 MB. The logo appears in the storefront header, footer, and browser tab.</p>
+                            <img class="branding-preview wide" id="logoPreview" alt="Current store logo preview" hidden>
+                            <div class="wide form-actions">
+                                <button type="submit">Save logo</button>
+                                <button class="button-secondary" id="removeLogoButton" type="button">Use default logo</button>
+                                <span class="error" id="logoMessage" aria-live="polite"></span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="panel">
+                        <h2>Starting video</h2>
+                        <form id="videoForm" class="form-grid">
+                            <label class="wide">Upload intro video<input id="videoInput" name="introVideo" type="file" accept="video/mp4,video/webm"></label>
+                            <p class="wide image-help">Use an MP4 or WebM video up to 25 MB. It plays muted over the intro screen and can be skipped. The logo animation is disabled when no intro video is configured.</p>
+                            <video class="video-preview wide" id="videoPreview" controls playsinline hidden></video>
+                            <div class="wide form-actions">
+                                <button type="submit">Save video</button>
+                                <button class="button-secondary" id="removeVideoButton" type="button">Remove video</button>
+                                <span class="error" id="videoMessage" aria-live="polite"></span>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <section data-panel="footer" hidden>
+                    <div class="page-heading"><h1>Footer links</h1><p class="muted">Change footer section headings, link names and destinations, or add and remove links. Explore links with a category filter open the matching shop category.</p></div>
+                    <form id="footerForm">
+                        <div id="footerSectionEditor" class="list"></div>
+                        <div class="panel form-actions">
+                            <button type="submit">Save footer changes</button>
+                            <span class="error" id="footerMessage" aria-live="polite"></span>
+                        </div>
+                    </form>
+                </section>
+            </main>
+        </div>
+    </div>
+    <div class="toast" id="toast" role="status" hidden></div>
+    <script src="/admin/js/admin.js" defer></script>
+</body>
+</html>

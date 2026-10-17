@@ -1,0 +1,145 @@
+<main id="home">
+    <section class="hero">
+        <div class="hero-copy">
+            <div class="eyebrow">Timeless elegance · made for you</div>
+            <h1>Jewellery with a little more you.</h1>
+            <p>Discover thoughtful little treasures for everyday moments and the celebrations you’ll remember.</p>
+            <a class="button-gold" href="#shop">Find your shine <span>→</span></a>
+            <div class="hero-proof">
+                <span class="stars">★★★★★</span>
+                <span>Loved by 10,000 happy customers</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section collections" id="collections">
+        <div class="section-head">
+            <div>
+                <div class="kicker">Explore our collection</div>
+                <h2 class="section-title">Shop by Category</h2>
+                <p class="section-intro">Discover timeless pieces for every moment. From classic essentials to statement designs, find the perfect jewellery for you.</p>
+            </div>
+        </div>
+
+        <div class="collection-layout">
+            <div class="collection-grid" id="collectionGrid"></div>
+            <aside class="category-list">
+                <div class="category-list-head">
+                    <div class="kicker">Browse</div>
+                    <h3>All categories</h3>
+                    <small>17 styles</small>
+                </div>
+                <nav id="categoryNav"></nav>
+            </aside>
+        </div>
+
+        <p class="collection-note">
+            <span>────</span>17 Categories, Endless Possibilities<span>────</span><br>✦
+        </p>
+    </section>
+
+    <section class="campaign">
+        <div>
+            <div class="kicker">A little more shine</div>
+            <h2>Jewellery for your beautiful moments</h2>
+            <p>A little extra sparkle for every story worth celebrating.</p>
+            <a class="button-gold" href="#shop">Explore the collection <span>→</span></a>
+        </div>
+    </section>
+
+    <section class="section products" id="shop">
+        <div class="section-head">
+            <div>
+                <div class="kicker">Curated for your everyday</div>
+                <h2 class="section-title">Featured Jewellery</h2>
+            </div>
+
+            <div class="shop-filters">
+                <label class="filter-label">
+                    Filter by category
+                    <select id="categoryFilter">
+                        <option value="All">All products</option>
+                    </select>
+                </label>
+
+                <label class="filter-label">
+                    Filter by price
+                    <select id="priceFilter">
+                        <option value="all">All prices</option>
+                        <option value="under40">Under Rs 40</option>
+                        <option value="40to50">Rs 40 – Rs 50</option>
+                        <option value="over50">Above Rs 50</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="product-grid" id="productGrid" aria-label="Jewellery products"></div>
+    </section>
+
+    <section class="elegance reveal" id="elegance">
+        <div class="elegance-photo">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1100&q=86" alt="Elegant layered necklaces">
+        </div>
+
+        <div class="elegance-copy">
+            <div class="kicker">Elegance in every detail</div>
+            <h2>Designed to make every moment shine.</h2>
+            <p>Thoughtfully chosen pieces, made to feel special from the first wear to every time you reach for them again.</p>
+            <div class="benefits">
+                <span><b>✦</b>Carefully selected</span>
+                <span><b>✧</b>Made for everyday</span>
+                <span><b>◇</b>Gift-ready details</span>
+            </div>
+            <a class="button-gold" href="#shop">Explore the collection <span>→</span></a>
+        </div>
+    </section>
+
+    <section class="feedback" id="customer-feedback">
+        <div class="feedback-heading">
+            <div class="kicker">A little love from our customers</div>
+            <h2>Customer Feedback</h2>
+            <p>Every note helps us make your next little treasure even more special.</p>
+        </div>
+
+        <div class="review-wrap">
+            <button class="review-arrow" type="button" id="reviewPrev" aria-label="Previous review">←</button>
+            <article class="review-card" id="reviewCard" aria-live="polite"></article>
+            <button class="review-arrow" type="button" id="reviewNext" aria-label="Next review">→</button>
+        </div>
+
+        <div class="review-dots" id="reviewDots"></div>
+
+        <form class="feedback-form" id="feedbackForm">
+            <h3>Share your experience</h3>
+            <p>Tell us what you think about your Bandilki piece.</p>
+
+            <label>
+                Your name (optional)
+                <input id="reviewName" maxlength="50" placeholder="How should we call you?">
+            </label>
+
+            <label>
+                Your rating
+                <span class="rating-stars" id="ratingStars" role="group" aria-label="Choose a rating"></span>
+            </label>
+
+            <label class="wide">
+                Your feedback
+                <textarea id="reviewText" required maxlength="500" placeholder="What did you love about your piece?"></textarea>
+            </label>
+
+            <button class="feedback-submit" type="submit">Send feedback →</button>
+            <span class="form-message" id="formMessage" aria-live="polite"></span>
+        </form>
+    </section>
+
+    <section class="promo">
+        <div>
+            <div class="kicker">A little something shiny</div>
+            <h2>Find the piece that feels like you.</h2>
+            <p>Explore thoughtful little treasures for everyday moments and the ones worth celebrating.</p>
+        </div>
+        <a href="#shop" class="button-gold">Explore the collection <span>→</span></a>
+    </section>
+</main>
