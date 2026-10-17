@@ -1715,7 +1715,7 @@ def main():
         return
     if sys.argv[1:]:
         raise SystemExit("Usage: py -3 server.py [--create-admin]")
-    host = os.environ.get("HOST", "127.0.0.1")
+    host = os.environ.get("HOST", "https://thebandilkishines-live-1.onrender.com")
     try:
         port = int(os.environ.get("PORT", "8000"))
     except ValueError as error:
